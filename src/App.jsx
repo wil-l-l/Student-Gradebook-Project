@@ -10,7 +10,7 @@ function App() {
   useEffect(() => {
     const fetchGrades = async () => {
       try {
-        const response = await fetch(API_URL + "/1");
+        const response = await fetch(API_URL + "/2");
         const studentInfo = await response.json();
         setStudentInfo(studentInfo.info);
       } catch (err) {
