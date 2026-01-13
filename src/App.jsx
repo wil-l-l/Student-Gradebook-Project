@@ -1,10 +1,11 @@
-import "./Reset.css"
+import "./Reset.css";
 import "./App.css";
+import MainSection from "./components/MainSection/MainSection";
 
 function App() {
   return (
     <>
-      <h1>Grades</h1>
+      <MainSection />
     </>
   );
 }
