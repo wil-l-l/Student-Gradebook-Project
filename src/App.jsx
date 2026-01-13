@@ -4,7 +4,7 @@ import MainSection from "./components/MainSection/MainSection";
 import { useEffect, useState } from "react";
 
 function App() {
-  const [studentInfo, setStudentInfo] = useState({});
+  const [studentInfo, setStudentInfo] = useState(null);
 
   const API_URL = "http://localhost:3500/students";
   useEffect(() => {
@@ -12,7 +12,7 @@ function App() {
       try {
         const response = await fetch(API_URL + "/1");
         const studentInfo = await response.json();
-        setStudentInfo(studentInfo);
+        setStudentInfo(studentInfo.info);
       } catch (err) {
         console.log(`Student Grade Fetching Error: ${err}`);
       }

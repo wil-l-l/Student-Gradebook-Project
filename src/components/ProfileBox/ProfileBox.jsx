@@ -5,7 +5,7 @@ const ProfileBox = ({ studentInfo }) => {
     <div className="profile-box">
       <img src="" alt="" className="profile-img" />
       <div className="profile-name-box">
-        <p className="profile-name">Marbles, Jenna</p>
+        <p className="profile-name">{studentInfo.name}</p>
       </div>
     </div>
   );

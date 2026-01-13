@@ -1,32 +1,21 @@
 import "./GradeRows.css";
 
 const GradeRows = ({ studentInfo }) => {
-  return [
-    {
-      pd: "01",
-      course: "CHORUS 1",
-      grade: "99",
-    },
-    {
-      pd: "02",
-      course: "WORLD HIST",
-      grade: "",
-    },
-  ].map(({ pd, course, grade }) => (
+  return studentInfo.courses.map(({ name, pd, grade }) => (
     <tr>
       <td>{pd}</td>
-      <td>{course}</td>
+      <td>{name}</td>
       <td className="grade-cell">
         {!grade
           ? "NG"
           : `${grade}% ${
-              Number(grade) >= 90
+              grade >= 90
                 ? "A"
-                : Number(grade) >= 80
+                : grade >= 80
                 ? "B"
-                : Number(grade) >= 70
+                : grade >= 70
                 ? "C"
-                : Number(grade) >= 60
+                : grade >= 60
                 ? "D"
                 : "F"
             }`}

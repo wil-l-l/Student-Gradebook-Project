@@ -6,9 +6,15 @@ import QuartersBar from "../QuartersBar/QuartersBar";
 const MainSection = ({ studentInfo }) => {
   return (
     <main className="main-section">
-      <ProfileBox studentInfo={studentInfo} />
-      <QuartersBar />
-      <GradeTable studentInfo={studentInfo} />
+      {!studentInfo ? (
+        <p>Loading...</p>
+      ) : (
+        <>
+          <ProfileBox studentInfo={studentInfo} />
+          <QuartersBar />
+          <GradeTable studentInfo={studentInfo} />
+        </>
+      )}
     </main>
   );
 };
