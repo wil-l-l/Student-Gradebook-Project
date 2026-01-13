@@ -1,7 +1,7 @@
-import "./GradeTable.css"
+import "./GradeTable.css";
 import GradeRows from "./GradeRows/GradeRows";
 
-const GradeTable = () => {
+const GradeTable = ({ studentInfo }) => {
   return (
     <table>
       <thead className="grade-table__heading-row">
@@ -12,7 +12,7 @@ const GradeTable = () => {
         </tr>
       </thead>
       <tbody>
-        <GradeRows />
+        <GradeRows studentInfo={studentInfo} />
       </tbody>
     </table>
   );

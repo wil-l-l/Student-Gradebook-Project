@@ -1,6 +1,6 @@
 import "./GradeRows.css";
 
-const GradeRows = () => {
+const GradeRows = ({ studentInfo }) => {
   return [
     {
       pd: "01",

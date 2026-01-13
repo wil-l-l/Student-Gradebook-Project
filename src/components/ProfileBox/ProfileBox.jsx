@@ -1,6 +1,6 @@
 import "./ProfileBox.css";
 
-const ProfileBox = () => {
+const ProfileBox = ({ studentInfo }) => {
   return (
     <div className="profile-box">
       <img src="" alt="" className="profile-img" />

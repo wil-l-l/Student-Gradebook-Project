@@ -3,12 +3,12 @@ import GradeTable from "../GradeTable/GradeTable";
 import ProfileBox from "../ProfileBox/ProfileBox";
 import QuartersBar from "../QuartersBar/QuartersBar";
 
-const MainSection = () => {
+const MainSection = ({ studentInfo }) => {
   return (
     <main className="main-section">
-      <ProfileBox />
+      <ProfileBox studentInfo={studentInfo} />
       <QuartersBar />
-      <GradeTable />
+      <GradeTable studentInfo={studentInfo} />
     </main>
   );
 };
