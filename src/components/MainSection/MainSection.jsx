@@ -1,8 +1,11 @@
+import "./MainSection.css"
 import GradeTable from "../GradeTable/GradeTable";
+import ProfileBox from "../ProfileBox/ProfileBox";
 
 const MainSection = () => {
   return (
-    <main>
+    <main className="main-section">
+      <ProfileBox />
       <GradeTable />
     </main>
   );
