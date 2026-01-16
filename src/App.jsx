@@ -21,8 +21,8 @@ function App() {
         const studentInfo = await response.json();
         setStudentInfo(studentInfo.info);
       } catch (err) {
-        setError("Error Loading Data!")
-        console.log(`Student Grade Fetching Error: ${err}`);
+        if (err.name === "AbortError") return;
+        setError("Error Loading Data!");
       }
     };
     fetchGrades();
