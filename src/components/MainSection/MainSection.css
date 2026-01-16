@@ -1,4 +1,7 @@
 .main-section {
   width: fit-content;
+  border-radius: var(--table-border);
   zoom: 1.5;
+  overflow: hidden;
+  box-shadow: 0px 0px 8px 3px rgb(202, 202, 202);
 }
