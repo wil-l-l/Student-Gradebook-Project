@@ -5,6 +5,7 @@ import { useEffect, useState, useRef } from "react";
 
 function App() {
   const [studentInfo, setStudentInfo] = useState(null);
+  const [error, setError] = useState(null);
   const abortControllerRef = useRef(null);
 
   const API_URL = "http://localhost:3000/students";
@@ -20,6 +21,7 @@ function App() {
         const studentInfo = await response.json();
         setStudentInfo(studentInfo.info);
       } catch (err) {
+        setError("Error Loading Data!")
         console.log(`Student Grade Fetching Error: ${err}`);
       }
     };
@@ -28,7 +30,7 @@ function App() {
 
   return (
     <>
-      <MainSection studentInfo={studentInfo} />
+      <MainSection studentInfo={studentInfo} error={error} />
     </>
   );
 }

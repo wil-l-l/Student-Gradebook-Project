@@ -3,11 +3,13 @@ import GradeTable from "../GradeTable/GradeTable";
 import ProfileBox from "../ProfileBox/ProfileBox";
 import QuartersBar from "../QuartersBar/QuartersBar";
 
-const MainSection = ({ studentInfo }) => {
+const MainSection = ({ studentInfo, error }) => {
   return (
     <main className="main-section">
-      {!studentInfo ? (
+      {!studentInfo && error === null ? (
         <p>Loading...</p>
+      ) : error !== null ? (
+        <p className="error-text">Error Loading Data. Please refresh page!</p>
       ) : (
         <>
           <ProfileBox studentInfo={studentInfo} />
