@@ -1,0 +1,9 @@
+.header-box {
+  margin-bottom: 40px;
+}
+
+.update-btn-box {
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+}

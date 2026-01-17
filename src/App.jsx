@@ -1,5 +1,6 @@
 import "./Reset.css";
 import "./App.css";
+import Header from "./components/Header/Header";
 import MainSection from "./components/MainSection/MainSection";
 import { useEffect, useState, useRef } from "react";
 
@@ -30,6 +31,7 @@ function App() {
 
   return (
     <>
+      <Header />
       <MainSection studentInfo={studentInfo} error={error} />
     </>
   );

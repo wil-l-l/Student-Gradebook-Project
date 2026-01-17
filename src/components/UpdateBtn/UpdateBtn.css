@@ -1,0 +1,7 @@
+.update-btn {
+  width: 70px;
+  height: 70px;
+  border: 1px solid lightgray;
+  border-radius: 50%;
+  font-size: 1.4rem;
+}
