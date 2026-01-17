@@ -6,8 +6,8 @@ const GradeRows = ({ studentInfo }) => {
       pd,
       courseInfo: (
         <tr className="grade-row">
-          <td>{pd}</td>
-          <td>{name}</td>
+          <td className="grade-cell">{pd}</td>
+          <td className="grade-cell grade-table__col-2" >{name}</td>
           <td className="grade-cell">
             {!grade
               ? "NG"

@@ -1,7 +1,7 @@
 :root {
-  --secondary-color: #b7f0fac8;
+  --secondary-color: #d9dee4;
   --dark-gray: #4b4b4b;
-  --primary-color: white;
+  --primary-color: #edeef0;
   --table-border: 9px;
 }
 
@@ -12,6 +12,10 @@
   height: 100vh;
 }
 
-.error-text{
+body {
+  color: #323955;
+}
+
+.error-text {
   color: red;
 }
