@@ -1,13 +1,13 @@
 import "./Header.css";
-import UpdateBtn from "../UpdateBtn/UpdateBtn";
+import RequestBtn from "../RequestBtn/RequestBtn";
 
 const Header = () => {
   return (
     <header className="header-box">
-      <div className="update-btn-box">
-        <UpdateBtn content={"ADD"} />
-        <UpdateBtn content={"UPD"} />
-        <UpdateBtn content={"DEL"} />
+      <div className="request-btn-box">
+        <RequestBtn content={"ADD"} />
+        <RequestBtn content={"UPD"} />
+        <RequestBtn content={"DEL"} />
       </div>
     </header>
   );
