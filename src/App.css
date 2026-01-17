@@ -12,8 +12,13 @@
   height: 100vh;
 }
 
+html{
+  font-size: 62.5%;
+}
+
 body {
   color: #323955;
+  font-family: "Inter", sans-serif;
 }
 
 .error-text {
