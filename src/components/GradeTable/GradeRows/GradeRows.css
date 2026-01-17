@@ -1,7 +1,8 @@
-.grade-cell {
-  text-align: right;
+.grade-row:nth-child(even) {
+  background: var(--secondary-color);
 }
 
-tr:nth-child(even) {
-  background-color: var(--table-gray);
+
+.grade-cell {
+  text-align: right;
 }

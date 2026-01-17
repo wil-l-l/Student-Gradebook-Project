@@ -1,3 +1,7 @@
+.grade-table{
+  border-collapse: collapse;
+}
+
 .grade-table__heading-row {
   background-color: var(--table-gray);
 }

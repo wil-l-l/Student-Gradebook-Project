@@ -5,7 +5,7 @@ const GradeRows = ({ studentInfo }) => {
     .map(({ pd, name, grade }) => ({
       pd,
       courseInfo: (
-        <tr>
+        <tr className="grade-row">
           <td>{pd}</td>
           <td>{name}</td>
           <td className="grade-cell">

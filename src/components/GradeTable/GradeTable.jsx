@@ -3,7 +3,7 @@ import GradeRows from "./GradeRows/GradeRows";
 
 const GradeTable = ({ studentInfo }) => {
   return (
-    <table>
+    <table className="grade-table">
       <thead className="grade-table__heading-row">
         <tr>
           <th>Pd</th>
