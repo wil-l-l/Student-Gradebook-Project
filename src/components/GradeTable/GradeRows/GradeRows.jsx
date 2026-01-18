@@ -1,17 +1,13 @@
 import "./GradeRows.css";
 
-const GradeRows = ({ studentInfo, editMode }) => {
-  function handleRowClick() {
-    if (editMode !== "DEL") return;
-  }
-
+const GradeRows = ({ studentInfo }) => {
   return studentInfo.courses
     .map(({ pd, name, grade }) => ({
       pd,
       courseInfo: (
-        <tr onClick={handleRowClick}>
+        <tr className="grade-row">
           <td className="grade-cell">{pd}</td>
-          <td className="grade-cell grade-table__col-2">{name}</td>
+          <td className="grade-cell grade-table__col-2" >{name}</td>
           <td className="grade-cell">
             {!grade
               ? "NG"

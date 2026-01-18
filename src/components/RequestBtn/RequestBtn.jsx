@@ -1,16 +1,16 @@
 import "./RequestBtn.css";
 
-const RequestBtn = ({ content, setEditMode }) => {
+const RequestBtn = ({ content }) => {
   const requestTypes = {
-    ADD: "POST",
-    UPD: "PATCH",
-    DEL: "DELETE",
+    "ADD": 'POST',
+    "UPD": 'PATCH',
+    "DEL": 'DELETE',
   };
 
   return (
     <button
       onClick={() => {
-        setEditMode(requestTypes[content] ? content : null);
+        console.log(`An RequestBtn was clicked.`);
       }}
       className="request-btn"
     >

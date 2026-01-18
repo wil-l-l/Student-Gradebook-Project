@@ -5,7 +5,6 @@ import MainSection from "./components/MainSection/MainSection";
 import { useEffect, useState, useRef } from "react";
 
 function App() {
-  const [editMode, setEditMode] = useState(null);
   const [studentInfo, setStudentInfo] = useState(null);
   const [error, setError] = useState(null);
   const abortControllerRef = useRef(null);
@@ -32,12 +31,8 @@ function App() {
 
   return (
     <>
-      <Header setEditMode={setEditMode} />
-      <MainSection
-        studentInfo={studentInfo}
-        error={error}
-        editMode={editMode}
-      />
+      <Header />
+      <MainSection studentInfo={studentInfo} error={error} />
     </>
   );
 }
