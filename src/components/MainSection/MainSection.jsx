@@ -3,7 +3,7 @@ import GradeTable from "../GradeTable/GradeTable";
 import ProfileBox from "../ProfileBox/ProfileBox";
 import QuartersBar from "../QuartersBar/QuartersBar";
 
-const MainSection = ({ studentInfo, error }) => {
+const MainSection = ({ studentInfo, error, editMode }) => {
   return (
     <main className="main-section">
       {!studentInfo && error === null ? (
@@ -14,7 +14,7 @@ const MainSection = ({ studentInfo, error }) => {
         <>
           <ProfileBox studentInfo={studentInfo} />
           <QuartersBar />
-          <GradeTable studentInfo={studentInfo} />
+          <GradeTable studentInfo={studentInfo} editMode={editMode} />
         </>
       )}
     </main>
