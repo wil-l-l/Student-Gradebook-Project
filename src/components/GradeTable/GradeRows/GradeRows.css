@@ -8,3 +8,7 @@
 .grade-cell:last-child {
   text-align: right;
 }
+
+.delete-row{
+  border: 2px dashed red;
+}

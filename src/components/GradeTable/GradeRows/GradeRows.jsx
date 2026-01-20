@@ -1,18 +1,36 @@
 import "./GradeRows.css";
+import { useRef, useState } from "react";
 
 const GradeRows = ({ studentInfo, editMode }) => {
-  function handleRowClick() {
+  const itemsRef = useRef(null);
+  const [rowPdClicked, setRowPdClicked] = useState(null);
+
+  function handleRowClick(pd) {
     if (editMode !== "DEL") return;
+    if (rowPdClicked === pd) return;
+
+    itemsRef.current.forEach((rowElem, key) => {
+      if (key === pd) setRowPdClicked(pd);
+    });
   }
   function handleCellClick() {
-    if (editMode !== 'UPD') return;
+    if (editMode !== "UPD") return;
   }
 
   return studentInfo.courses
     .map(({ pd, name, grade }) => ({
       pd,
       courseInfo: (
-        <tr onClick={handleRowClick} className="grade-row">
+        <tr
+          onClick={() => {
+            handleRowClick(pd);
+          }}
+          ref={(rowElem) => {
+            if (!itemsRef.current) itemsRef.current = [];
+            itemsRef.current.push({ pd: rowElem });
+          }}
+          className={`grade-row ${pd === rowPdClicked ? "delete-row" : ""}`}
+        >
           <td
             onClick={() => {
               handleCellClick();
