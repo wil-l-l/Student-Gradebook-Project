@@ -2,15 +2,18 @@ import "./GradeRows.css";
 import { useRef, useState } from "react";
 
 const GradeRows = ({ studentInfo, editMode }) => {
-  const itemsRef = useRef(null);
+  const rowsRef = useRef(null);
   const [rowPdClicked, setRowPdClicked] = useState(null);
 
   function handleRowClick(pd) {
     if (editMode !== "DEL") return;
     if (rowPdClicked === pd) return;
 
-    itemsRef.current.forEach((rowElem, key) => {
-      if (key === pd) setRowPdClicked(pd);
+    rowsRef.current.some((period) => {
+      if (period === pd) {
+        setRowPdClicked(pd);
+        return true;
+      }
     });
   }
   function handleCellClick() {
@@ -25,9 +28,9 @@ const GradeRows = ({ studentInfo, editMode }) => {
           onClick={() => {
             handleRowClick(pd);
           }}
-          ref={(rowElem) => {
-            if (!itemsRef.current) itemsRef.current = [];
-            itemsRef.current.push({ pd: rowElem });
+          ref={() => {
+            if (!rowsRef.current) rowsRef.current = [];
+            rowsRef.current.push(pd);
           }}
           className={`grade-row ${pd === rowPdClicked ? "delete-row" : ""}`}
         >
