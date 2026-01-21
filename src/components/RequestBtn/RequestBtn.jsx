@@ -1,6 +1,6 @@
 import "./RequestBtn.css";
 
-const RequestBtn = ({ content, setEditMode }) => {
+const RequestBtn = ({ content, editMode, setEditMode }) => {
   const requestTypes = {
     ADD: "POST",
     UPD: "PATCH",
@@ -10,9 +10,15 @@ const RequestBtn = ({ content, setEditMode }) => {
   return (
     <button
       onClick={() => {
-        setEditMode(requestTypes[content] ? content : null);
+        setEditMode(
+          editMode === null && requestTypes[content]
+            ? content
+            : content !== editMode
+              ? editMode
+              : null,
+        );
       }}
-      className="request-btn"
+      className={`request-btn ${editMode === content ? "request-btn--active" : "request-btn--inactive"}`}
     >
       {content}
     </button>

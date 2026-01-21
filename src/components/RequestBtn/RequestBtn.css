@@ -1,7 +1,13 @@
 .request-btn {
   width: 70px;
   height: 70px;
-  border: 1px solid lightgray;
   border-radius: 50%;
   font-size: 1.4rem;
+  border: none;
+}
+.request-btn--active {
+  border: 1px solid green;
+}
+.request-btn--inactive {
+  border: 1px solid lightgray;
 }
