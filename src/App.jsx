@@ -32,7 +32,7 @@ function App() {
 
   return (
     <>
-      <Header setEditMode={setEditMode} />
+      <Header editMode={editMode} setEditMode={setEditMode} />
       <MainSection
         studentInfo={studentInfo}
         error={error}
