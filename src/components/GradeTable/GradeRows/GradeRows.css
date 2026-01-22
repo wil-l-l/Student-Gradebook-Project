@@ -1,14 +1,31 @@
 .grade-row {
   height: 22px;
+  position: relative;
 }
 .grade-row:nth-child(even) {
   background: var(--secondary-color);
 }
 
-.grade-cell:last-child {
+.delete-row {
+  border: 2px dashed red;
+}
+
+.grade-row__cell {
+  position: relative;
+}
+.grade-row__cell:last-child {
   text-align: right;
 }
 
-.delete-row{
-  border: 2px dashed red;
+.cell-input-box {
+  background: none;
+  border: 2px solid var(--teritary-color);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.cell-input-box::placeholder {
+  text-align: center;
 }
