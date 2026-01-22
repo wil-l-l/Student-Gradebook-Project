@@ -3,119 +3,87 @@ import { useRef, useState } from "react";
 
 const GradeRows = ({ studentInfo, editMode }) => {
   const rowsRef = useRef(null);
-  const [rowPdClicked, setRowPdClicked] = useState(null);
+  const [activeRow, setActiveRow] = useState(null);
   const [cellToEdit, setCellToEdit] = useState(null);
+  const TABLE_CELL_CLASS = "grade-row__cell";
 
-  function handleRowClick(pd) {
+  function canEditCell(location) {
+    return (
+      editMode === "UPD" &&
+      cellToEdit !== null &&
+      cellToEdit.location === location
+    );
+  }
+
+  function handleRowClick(rowClicked) {
     if (editMode !== "DEL") return;
-    if (rowPdClicked === pd) return;
+    if (activeRow === rowClicked) return;
 
     rowsRef.current.some((period) => {
-      if (period === pd) {
-        setRowPdClicked(pd);
+      if (period === rowClicked) {
+        setActiveRow(rowClicked);
         return true;
       }
     });
   }
-  function handleCellClick(target) {
+
+  function handleCellClick(cell) {
     if (editMode !== "UPD") return;
 
-    let typeOfCell = "grade";
-    target.classList.forEach((name) => {
-      if (name === "course-cell") {
-        typeOfCell = "course";
-      }
-    });
+    const location = cell.getAttribute("location");
+    if (cellToEdit && cellToEdit.location === location) return;
 
-    let inputElement = null;
-    if (typeOfCell === "grade-cell") {
-      console.warn("grade-cell clicked!");
-      inputElement = (
-        <input
-          className="cell-input-box"
-          type="text"
-          placeholder="Change Grade"
-        />
-      );
-    } else {
-      inputElement = (
-        <input
-          className="cell-input-box"
-          type="text"
-          placeholder="Change Course Name"
-        />
-      );
-    }
+    const cellType = location[2] === "2" ? "course" : "grade"; // location[3] = the col the cell is in the table
 
     setCellToEdit({
-      pd: target.getAttribute("id"),
-      innerText: target.innerText,
+      location,
       content: (
         <form
           onSubmit={(e) => {
             e.preventDefault();
           }}
         >
-          {inputElement}
+          <input
+            className={`${editMode === "UPD" ? "cell-input-box" : TABLE_CELL_CLASS}`}
+            type="text"
+            placeholder={`${cellType === "course" ? "Course..." : "Grade..."}`}
+          />
         </form>
       ),
     });
   }
 
   return studentInfo.courses
-    .map(({ pd, name, grade }) => ({
+    .map(({ pd, name, grade }, row) => ({
       pd,
       courseInfo: (
         <tr
-          onClick={() => {
-            handleRowClick(pd);
-          }}
+          onClick={() => handleRowClick(pd)}
           ref={() => {
             if (!rowsRef.current) rowsRef.current = [];
             rowsRef.current.push(pd);
           }}
-          className={`grade-row ${pd === rowPdClicked ? "delete-row" : ""}`}
+          className={`grade-row ${editMode === "DEL" && pd === activeRow ? "delete-row" : ""}`}
         >
-          <td className="grade-cell">{pd}</td>
           <td
-            id={pd}
-            onClick={(e) => {
-              if (cellToEdit && Number(cellToEdit.pd) === Number(pd)) return;
-              handleCellClick(e.target);
-            }}
-            className="grade-row__cell course-cell grade-table__col-2"
+            location={`${row},1`}
+            className={`${TABLE_CELL_CLASS} period-cell`}
           >
-            {cellToEdit !== null &&
-            cellToEdit.innerText === name &&
-            Number(cellToEdit.pd) === Number(pd)
-              ? cellToEdit.content
-              : name}
+            {pd}
           </td>
           <td
-            id={pd}
-            onClick={(e) => {
-              if (cellToEdit && Number(cellToEdit.pd) === Number(pd)) return;
-
-              handleCellClick(e.target);
-            }}
-            className="grade-row__cell grade-cell"
+            location={`${row},2`}
+            onClick={(e) => handleCellClick(e.target)}
+            className={`${TABLE_CELL_CLASS} course-cell grade-table__col-2`}
           >
-            {cellToEdit !== null &&
-            Number(cellToEdit.pd) === Number(pd) &&
-            cellToEdit.innerText ===
-              (!grade
-                ? "NG"
-                : `${grade}% ${
-                    grade >= 90
-                      ? "A"
-                      : grade >= 80
-                        ? "B"
-                        : grade >= 70
-                          ? "C"
-                          : grade >= 60
-                            ? "D"
-                            : "F"
-                  }`)
+            {canEditCell(`${row},2`) ? cellToEdit.content : name}
+          </td>
+          <td
+            location={`${row},3`}
+            onClick={(e) => handleCellClick(e.target)}
+            className={`${TABLE_CELL_CLASS} grade-cell`}
+          >
+            {canEditCell(`${row},3`)
               ? cellToEdit.content
               : !grade
                 ? "NG"
