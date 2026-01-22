@@ -3,72 +3,101 @@ import { useRef, useState } from "react";
 
 const GradeRows = ({ studentInfo, editMode }) => {
   const rowsRef = useRef(null);
-  const [rowPdClicked, setRowPdClicked] = useState(null);
+  const [activeRow, setActiveRow] = useState(null);
+  const [cellToEdit, setCellToEdit] = useState(null);
+  const TABLE_CELL_CLASS = "grade-row__cell";
 
-  function handleRowClick(pd) {
+  function canEditCell(location) {
+    return (
+      editMode === "UPD" &&
+      cellToEdit !== null &&
+      cellToEdit.location === location
+    );
+  }
+
+  function handleRowClick(rowClicked) {
     if (editMode !== "DEL") return;
-    if (rowPdClicked === pd) return;
+    if (activeRow === rowClicked) return;
 
     rowsRef.current.some((period) => {
-      if (period === pd) {
-        setRowPdClicked(pd);
+      if (period === rowClicked) {
+        setActiveRow(rowClicked);
         return true;
       }
     });
   }
-  function handleCellClick() {
+
+  function handleCellClick(cell) {
     if (editMode !== "UPD") return;
+
+    const location = cell.getAttribute("location");
+    if (cellToEdit && cellToEdit.location === location) return;
+
+    const cellType = location[2] === "2" ? "course" : "grade"; // location[3] = the col the cell is in the table
+
+    setCellToEdit({
+      location,
+      content: (
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+          }}
+        >
+          <input
+            className={`${editMode === "UPD" ? "cell-input-box" : TABLE_CELL_CLASS}`}
+            type="text"
+            placeholder={`${cellType === "course" ? "Course..." : "Grade..."}`}
+          />
+        </form>
+      ),
+    });
   }
 
   return studentInfo.courses
-    .map(({ pd, name, grade }) => ({
+    .map(({ pd, name, grade }, row) => ({
       pd,
       courseInfo: (
         <tr
-          onClick={() => {
-            handleRowClick(pd);
-          }}
+          onClick={() => handleRowClick(pd)}
           ref={() => {
             if (!rowsRef.current) rowsRef.current = [];
             rowsRef.current.push(pd);
           }}
-          className={`grade-row ${pd === rowPdClicked ? "delete-row" : ""}`}
+          className={`grade-row ${editMode === "DEL" && pd === activeRow ? "delete-row" : ""}`}
         >
           <td
-            onClick={() => {
-              handleCellClick();
-            }}
-            className="grade-cell"
+            location={`${row},1`}
+            className={`${TABLE_CELL_CLASS} period-cell`}
           >
             {pd}
           </td>
           <td
-            onClick={() => {
-              handleCellClick();
-            }}
-            className="grade-cell grade-table__col-2"
+            location={`${row},2`}
+            onClick={(e) => handleCellClick(e.target)}
+            className={`${TABLE_CELL_CLASS} course-cell grade-table__col-2`}
           >
-            {name}
+            {canEditCell(`${row},2`) ? cellToEdit.content : name}
           </td>
           <td
-            onClick={() => {
-              handleCellClick();
-            }}
-            className="grade-cell"
+            location={`${row},3`}
+            onClick={(e) => handleCellClick(e.target)}
+            className={`${TABLE_CELL_CLASS} grade-cell`}
           >
-            {!grade
-              ? "NG"
-              : `${grade}% ${
-                  grade >= 90
-                    ? "A"
-                    : grade >= 80
-                      ? "B"
-                      : grade >= 70
-                        ? "C"
-                        : grade >= 60
-                          ? "D"
-                          : "F"
-                }`}
+            {canEditCell(`${row},3`)
+              ? cellToEdit.content
+              : !grade
+                ? "NG"
+                : `${grade}% ${
+                    grade >= 90
+                      ? "A"
+                      : grade >= 80
+                        ? "B"
+                        : grade >= 70
+                          ? "C"
+                          : grade >= 60
+                            ? "D"
+                            : "F"
+                  }`}
           </td>
         </tr>
       ),
