@@ -33,7 +33,7 @@ const GradeRows = ({ studentInfo, editMode }) => {
     const location = cell.getAttribute("location");
     if (cellToEdit && cellToEdit.location === location) return;
 
-    const cellType = location[2] === "2" ? "course" : "grade"; // location[3] = the col the cell is in the table
+    const cellType = location[2] === "2" ? "course" : "grade"; // location[2] = the col the cell is in the table
 
     setCellToEdit({
       location,
