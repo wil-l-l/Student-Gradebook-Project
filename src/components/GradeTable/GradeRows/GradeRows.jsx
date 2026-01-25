@@ -45,7 +45,9 @@ const GradeRows = ({ studentInfo, editMode }) => {
         >
           <input
             className={`${editMode === "UPD" ? "cell-input-box" : TABLE_CELL_CLASS}`}
-            type="text"
+            type={`${cellType === "course" ? "text" : "number"}`}
+            min={0}
+            max={100}
             placeholder={`${cellType === "course" ? "Course..." : "Grade..."}`}
           />
         </form>
