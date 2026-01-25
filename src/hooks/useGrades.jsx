@@ -16,7 +16,7 @@ const useGrades = (pathParam) => {
           signal: abortControllerRef.current.signal,
         });
         const studentInfo = await response.json();
-        setStudentInfo(studentInfo.info);
+        setStudentInfo(studentInfo);
       } catch (err) {
         if (err.name === "AbortError") return;
         setError("Error Loading Data!");
