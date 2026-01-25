@@ -1,7 +1,7 @@
 import "./GradeRows.css";
 import { useRef, useState } from "react";
 
-const GradeRows = ({ studentInfo, editMode }) => {
+const GradeRows = ({ studentInfo, setStudentInfo, editMode }) => {
   const rowsRef = useRef(null);
   const [activeRow, setActiveRow] = useState(null);
   const [cellToEdit, setCellToEdit] = useState(null);

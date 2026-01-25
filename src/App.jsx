@@ -37,6 +37,7 @@ function App() {
         studentInfo={studentInfo}
         error={error}
         editMode={editMode}
+        setStudentInfo={setStudentInfo}
       />
     </>
   );
