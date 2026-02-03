@@ -88,6 +88,7 @@ const GradeRows = ({ studentInfo, setStudentInfo, editMode }) => {
               },
             );
 
+            // PATCH existing Data
             setNewStudentInfo({ ...studentInfo, courses: newStudentInfo });
 
             // Remove focus & cleanup
@@ -115,7 +116,6 @@ const GradeRows = ({ studentInfo, setStudentInfo, editMode }) => {
       pd,
       courseInfo: (
         <tr
-          key={pd}
           onClick={() => handleRowClick(pd)}
           ref={() => {
             if (!rowsRef.current) rowsRef.current = [];
