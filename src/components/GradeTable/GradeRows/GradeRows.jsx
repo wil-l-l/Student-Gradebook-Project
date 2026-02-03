@@ -5,6 +5,7 @@ const GradeRows = ({ studentInfo, setStudentInfo, editMode }) => {
   const rowsRef = useRef(null);
   const [activeRow, setActiveRow] = useState(null);
   const [cellToEdit, setCellToEdit] = useState(null);
+  const inputRef = useRef(null);
   const TABLE_CELL_CLASS = "grade-row__cell";
 
   function canEditCell(location) {
@@ -27,11 +28,12 @@ const GradeRows = ({ studentInfo, setStudentInfo, editMode }) => {
     });
   }
 
-  function handleCellClick(cell) {
+  function handleCellClick(cell, rowPeriod) {
     if (editMode !== "UPD") return;
 
     const location = cell.getAttribute("location");
-    if (cellToEdit && cellToEdit.location === location) return;
+    if (cellToEdit && cellToEdit.location === location) return; // Last condition means the same cell that has already been edited was clicked again (just in case)
+    if (cellToEdit && location === null) return; // The value of 'cell' parameter is a NESTED input element whose ancestor is a 'td' element. The HTML chain looks like this: td > form > input (the cell). The input element has no 'location' attribute and that also means this cell that was just clicked is the same cell currently being edited anyway (so don't run the rest of this function)
 
     const cellType = location[2] === "2" ? "course" : "grade"; // location[2] = the col the cell is in the table
 
@@ -39,8 +41,32 @@ const GradeRows = ({ studentInfo, setStudentInfo, editMode }) => {
       location,
       content: (
         <form
-          onSubmit={(e) => {
+          onSubmit={async (e) => {
             e.preventDefault();
+
+            const newStudentInfo = studentInfo.courses.map(
+              ({ name, pd, grade }) => {
+                if (rowPeriod === pd) {
+                  if (cellType === "course") {
+                    name = inputRef.current.value;
+                  } else {
+                    grade = inputRef.current.value;
+                  }
+                }
+                return {
+                  name,
+                  pd,
+                  grade,
+                };
+              },
+            );
+
+            // PATCH existing Data
+
+            // Remove focus & cleanup
+            inputRef.current.blur()
+            setCellToEdit(null);
+            inputRef.current = null;
           }}
         >
           <input
@@ -48,6 +74,8 @@ const GradeRows = ({ studentInfo, setStudentInfo, editMode }) => {
             type={`${cellType === "course" ? "text" : "number"}`}
             min={0}
             max={100}
+            ref={inputRef}
+            autoFocus
             placeholder={`${cellType === "course" ? "Course..." : "Grade..."}`}
           />
         </form>
@@ -75,14 +103,14 @@ const GradeRows = ({ studentInfo, setStudentInfo, editMode }) => {
           </td>
           <td
             location={`${row},2`}
-            onClick={(e) => handleCellClick(e.target)}
+            onClick={(e) => handleCellClick(e.target, pd)}
             className={`${TABLE_CELL_CLASS} course-cell grade-table__col-2`}
           >
             {canEditCell(`${row},2`) ? cellToEdit.content : name}
           </td>
           <td
             location={`${row},3`}
-            onClick={(e) => handleCellClick(e.target)}
+            onClick={(e) => handleCellClick(e.target, pd)}
             className={`${TABLE_CELL_CLASS} grade-cell`}
           >
             {canEditCell(`${row},3`)
