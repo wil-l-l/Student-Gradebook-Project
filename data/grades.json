@@ -1,61 +1,75 @@
 {
   "students": [
     {
-      "id": 1,
-      "info": {
-        "name": "Loydie Kemery",
-        "grade_level": 9,
-        "courses": [
-          {
-            "name": "Sociology",
-            "pd": 2,
-            "grade": 69
-          },
-          {
-            "name": "Chemistry",
-            "pd": 6,
-            "grade": 89
-          }
-        ]
-      }
+      "id": "1",
+      "name": "Loydie Kemery",
+      "grade_level": 9,
+      "courses": [
+        {
+          "name": "Sociology",
+          "pd": 2,
+          "grade": 69
+        },
+        {
+          "name": "Chemistry",
+          "pd": 6,
+          "grade": 89
+        }
+      ]
     },
     {
-      "id": 2,
-      "info": {
-        "name": "Alf Tubridy",
-        "grade_level": 12,
-        "courses": [
-          {
-            "name": "Geography",
-            "pd": 5,
-            "grade": 63
-          },
-          {
-            "name": "Art",
-            "pd": 2,
-            "grade": 96
-          }
-        ]
-      }
+      "id": "2",
+      "name": "Alf Tubridy",
+      "grade_level": 12,
+      "courses": [
+        {
+          "name": "Geography",
+          "pd": 5,
+          "grade": 63
+        },
+        {
+          "name": "Art",
+          "pd": 2,
+          "grade": 96
+        },
+        {
+          "name": "Art",
+          "pd": 3,
+          "grade": "100"
+        },
+        {
+          "name": "Art",
+          "pd": 4,
+          "grade": 96
+        },
+        {
+          "name": "Art",
+          "pd": 6,
+          "grade": 96
+        },
+        {
+          "name": "Art",
+          "pd": 7,
+          "grade": "52"
+        }
+      ]
     },
     {
-      "id": 3,
-      "info": {
-        "name": "Marillin Stife",
-        "grade_level": 9,
-        "courses": [
-          {
-            "name": "Psychology",
-            "pd": 5,
-            "grade": 62
-          },
-          {
-            "name": "Literature",
-            "pd": 6,
-            "grade": 75
-          }
-        ]
-      }
+      "id": "3",
+      "name": "Marillin Stife",
+      "grade_level": 9,
+      "courses": [
+        {
+          "name": "Psychology",
+          "pd": 5,
+          "grade": 62
+        },
+        {
+          "name": "Literature",
+          "pd": 6,
+          "grade": 75
+        }
+      ]
     }
   ]
 }
