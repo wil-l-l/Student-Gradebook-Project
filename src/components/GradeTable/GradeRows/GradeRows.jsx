@@ -1,12 +1,39 @@
 import "./GradeRows.css";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const GradeRows = ({ studentInfo, setStudentInfo, editMode }) => {
   const rowsRef = useRef(null);
   const [activeRow, setActiveRow] = useState(null);
   const [cellToEdit, setCellToEdit] = useState(null);
+  const [newStudentInfo, setNewStudentInfo] = useState(null);
   const inputRef = useRef(null);
   const TABLE_CELL_CLASS = "grade-row__cell";
+  const abortControllerRef = useRef(null);
+  const BASE_URL = "http://localhost:3000/students";
+
+  useEffect(() => {
+    if (newStudentInfo) {
+      const fetchGrades = async () => {
+        if (abortControllerRef.current) abortControllerRef.current.abort();
+        abortControllerRef.current = new AbortController();
+
+        try {
+          const response = await fetch(BASE_URL + "/2", {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(newStudentInfo),
+          });
+          const studentInfo = await response.json();
+          setStudentInfo(studentInfo);
+        } catch (err) {
+          if (err.name === "AbortError") return;
+        }
+      };
+      fetchGrades();
+    }
+  }, [newStudentInfo, setStudentInfo]);
 
   function canEditCell(location) {
     return (
@@ -62,9 +89,10 @@ const GradeRows = ({ studentInfo, setStudentInfo, editMode }) => {
             );
 
             // PATCH existing Data
+            setNewStudentInfo({ ...studentInfo, courses: newStudentInfo });
 
             // Remove focus & cleanup
-            inputRef.current.blur()
+            inputRef.current.blur();
             setCellToEdit(null);
             inputRef.current = null;
           }}
