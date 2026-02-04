@@ -11,13 +11,27 @@ function App() {
 
   return (
     <>
-      <Header editMode={editMode} setEditMode={setEditMode} />
-      <MainSection
-        studentInfo={studentInfo}
-        error={error}
-        editMode={editMode}
-        setStudentInfo={setStudentInfo}
-      />
+      {!studentInfo && !error ? (
+        <h1>Loading...</h1>
+      ) : !studentInfo && error ? (
+        <h1 className="error-text">
+          Error Loading Data. Please refresh the page!
+        </h1>
+      ) : (
+        <>
+          <Header
+            editMode={editMode}
+            setEditMode={setEditMode}
+            studentInfo={studentInfo}
+          />
+
+          <MainSection
+            studentInfo={studentInfo}
+            editMode={editMode}
+            setStudentInfo={setStudentInfo}
+          />
+        </>
+      )}
     </>
   );
 }
