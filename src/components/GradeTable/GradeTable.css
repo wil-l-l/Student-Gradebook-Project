@@ -1,17 +1,13 @@
 .grade-table {
+  margin-top: 40px;
+  width: 333px;
+  font-size: 2.2rem;
   border-collapse: collapse;
-  width: 100%;
-  text-align: left;
-}
-
-.grade-table__col-2 {
-  padding-left: 56px;
+  text-align: center;
 }
 
 .grade-table__heading-row {
-  background-color: var(--table-gray);
-}
-
-.grade-table__heading-text:last-child {
-  text-align: right;
+  background-color: var(--teritary-color);
+  color: #ccd4de;
+  height: 50px;
 }

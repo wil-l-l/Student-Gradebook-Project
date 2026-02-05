@@ -125,21 +125,21 @@ const GradeRows = ({ studentInfo, setStudentInfo, editMode }) => {
         >
           <td
             location={`${row},1`}
-            className={`${TABLE_CELL_CLASS} period-cell`}
+            className={`${TABLE_CELL_CLASS}`}
           >
             {pd}
           </td>
           <td
             location={`${row},2`}
             onClick={(e) => handleCellClick(e.target, pd)}
-            className={`${TABLE_CELL_CLASS} course-cell grade-table__col-2`}
+            className={`${TABLE_CELL_CLASS}`}
           >
             {canEditCell(`${row},2`) ? cellToEdit.content : name}
           </td>
           <td
             location={`${row},3`}
             onClick={(e) => handleCellClick(e.target, pd)}
-            className={`${TABLE_CELL_CLASS} grade-cell`}
+            className={`${TABLE_CELL_CLASS}`}
           >
             {canEditCell(`${row},3`)
               ? cellToEdit.content
