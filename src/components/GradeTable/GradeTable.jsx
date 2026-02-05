@@ -4,7 +4,7 @@ import GradeRows from "./GradeRows/GradeRows";
 const GradeTable = ({ studentInfo, setStudentInfo, editMode }) => {
   return (
     <table className="grade-table">
-      <thead className="grade-table__heading-row">
+      <thead className="grade-table__heading-row grade-table__col-1">
         <tr>
           <th>Pd</th>
           <th>Course</th>
