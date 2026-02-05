@@ -1,5 +1,5 @@
 .grade-row {
-  height: 22px;
+  height: 55px;
   position: relative;
 }
 .grade-row:nth-child(even) {
@@ -12,9 +12,6 @@
 
 .grade-row__cell {
   position: relative;
-}
-.grade-row__cell:last-child {
-  text-align: right;
 }
 
 .cell-input-box {
