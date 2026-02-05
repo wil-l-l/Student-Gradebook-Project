@@ -1,5 +1,27 @@
 .header-box {
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 40px;
+  border-bottom: 1px solid lightgray;
+  padding: 8px 20px;
+}
+
+.profile-box {
+  display: flex;
+  align-items: center;
+}
+.profile-img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background-color: rgb(179, 179, 179);
+}
+.profile-name {
+  margin-left: 10px;
+  color: rgb(23, 23, 23);
+  font-size: 1.6rem;
 }
 
 .request-btn-box {

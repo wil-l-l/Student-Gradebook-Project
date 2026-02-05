@@ -3,22 +3,22 @@
   --dark-gray: #4b4b4b;
   --primary-color: #edeef0;
   --table-border: 9px;
-  --teritary-color: #3E53A0;
+  --teritary-color: #3e53a0;
 }
 
 #root {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   height: 100vh;
 }
 
-html{
+html {
   font-size: 62.5%;
 }
 
 body {
+  background-color: var(--primary-color);
   color: #323955;
   font-family: "Inter", sans-serif;
 }

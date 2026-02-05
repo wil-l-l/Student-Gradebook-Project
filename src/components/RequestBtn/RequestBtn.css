@@ -1,10 +1,19 @@
 .request-btn {
-  width: 70px;
-  height: 70px;
+  background-color: white;
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+.request-btn__img {
+  width: 17px;
+  height: 17px;
+}
+
 .request-btn--active {
   border: 1px solid green;
 }

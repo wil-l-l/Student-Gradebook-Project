@@ -1,10 +1,22 @@
 import "./RequestBtn.css";
+import UpdateIcon from "../../assets/icons/edit-pen-icon.png";
+import AddIcon from "../../assets/icons/plus-icon.png";
+import DeleteIcon from "../../assets/icons/trash-can-black-icon.png";
 
 const RequestBtn = ({ content, editMode, setEditMode }) => {
   const requestTypes = {
-    ADD: "POST",
-    UPD: "PATCH",
-    DEL: "DELETE",
+    ADD: {
+      method: "POST",
+      icon: AddIcon,
+    },
+    UPD: {
+      method: "PATCH",
+      icon: UpdateIcon,
+    },
+    DEL: {
+      method: "DELETE",
+      icon: DeleteIcon,
+    },
   };
 
   return (
@@ -20,7 +32,11 @@ const RequestBtn = ({ content, editMode, setEditMode }) => {
       }}
       className={`request-btn ${editMode === content ? "request-btn--active" : "request-btn--inactive"}`}
     >
-      {content}
+      <img
+        src={requestTypes[content].icon}
+        alt=""
+        className="request-btn__img"
+      />
     </button>
   );
 };
