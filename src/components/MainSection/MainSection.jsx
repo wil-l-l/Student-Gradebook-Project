@@ -1,4 +1,3 @@
-import "./MainSection.css";
 import GradeTable from "../GradeTable/GradeTable";
 
 const MainSection = ({ studentInfo, setStudentInfo, editMode }) => {
