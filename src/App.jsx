@@ -23,6 +23,7 @@ function App() {
             editMode={editMode}
             setEditMode={setEditMode}
             studentInfo={studentInfo}
+            setStudentInfo={setStudentInfo}
           />
 
           <MainSection

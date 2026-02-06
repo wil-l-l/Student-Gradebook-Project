@@ -2,8 +2,16 @@ import "./RequestBtn.css";
 import UpdateIcon from "../../assets/icons/edit-pen-icon.png";
 import AddIcon from "../../assets/icons/plus-icon.png";
 import DeleteIcon from "../../assets/icons/trash-can-black-icon.png";
+import { useRef, useState } from "react";
 
-const RequestBtn = ({ content, editMode, setEditMode }) => {
+const RequestBtn = ({
+  content,
+  editMode,
+  setEditMode,
+  setStudentInfo = null,
+}) => {
+  const [isAddMode, setIsAddMode] = useState(false);
+  const abortControllerRef = useRef(null);
   const requestTypes = {
     ADD: {
       method: "POST",
@@ -19,6 +27,63 @@ const RequestBtn = ({ content, editMode, setEditMode }) => {
     },
   };
 
+  async function onAddButtonClick() {
+    const BASE_URL = "http://localhost:3000/students";
+
+    const presetData = {
+      id: "5",
+      name: "Bri Stewart",
+      grade_level: 11,
+      courses: [
+        {
+          name: "Geography",
+          pd: 5,
+          grade: 63,
+        },
+        {
+          name: "Science",
+          pd: 2,
+          grade: 96,
+        },
+        {
+          name: "Math",
+          pd: 3,
+          grade: 96,
+        },
+        {
+          name: "Music",
+          pd: 4,
+          grade: 96,
+        },
+        {
+          name: "Art",
+          pd: 6,
+          grade: 96,
+        },
+        {
+          name: "English",
+          pd: 1,
+          grade: 96,
+        },
+      ],
+    };
+
+    if (abortControllerRef.current) abortControllerRef.current.abort();
+    abortControllerRef.current = new AbortController();
+
+    try {
+      const response = await fetch(BASE_URL, {
+        method: "POST",
+        body: JSON.stringify(presetData),
+        signal: abortControllerRef.current.signal,
+      });
+      const newData = await response.json();
+      setStudentInfo(newData);
+    } catch (err) {
+      if (err.name === "AbortError") return;
+    }
+  }
+
   return (
     <button
       onClick={() => {
@@ -29,6 +94,14 @@ const RequestBtn = ({ content, editMode, setEditMode }) => {
               ? editMode
               : null,
         );
+        if (content !== "ADD") return;
+        if (isAddMode) {
+          setIsAddMode(false);
+          setEditMode(null);
+        } else {
+          setIsAddMode(true);
+          onAddButtonClick();
+        }
       }}
       className={`request-btn ${editMode === content ? "request-btn--active" : "request-btn--inactive"}`}
     >

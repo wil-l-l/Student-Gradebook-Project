@@ -24,6 +24,7 @@ const GradeRows = ({ studentInfo, setStudentInfo, editMode }) => {
               "Content-Type": "application/json",
             },
             body: JSON.stringify(newStudentInfo),
+            signal: abortControllerRef.current.signal,
           });
           const studentInfo = await response.json();
           setStudentInfo(studentInfo);
