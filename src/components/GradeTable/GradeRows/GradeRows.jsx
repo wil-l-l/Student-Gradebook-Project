@@ -43,6 +43,12 @@ const GradeRows = ({ studentInfo, setStudentInfo, editMode }) => {
     );
   }
 
+  const closeActiveCell = () => {
+    inputRef.current.blur();
+    setCellToEdit(null);
+    inputRef.current = null;
+  };
+
   function handleRowClick(rowClicked) {
     if (editMode !== "DEL") return;
     if (activeRow === rowClicked) return;
@@ -90,10 +96,7 @@ const GradeRows = ({ studentInfo, setStudentInfo, editMode }) => {
 
             setNewStudentInfo({ ...studentInfo, courses: newStudentInfo });
 
-            // Remove focus & cleanup
-            inputRef.current.blur();
-            setCellToEdit(null);
-            inputRef.current = null;
+            closeActiveCell();
           }}
         >
           <input
@@ -104,6 +107,9 @@ const GradeRows = ({ studentInfo, setStudentInfo, editMode }) => {
             ref={inputRef}
             autoFocus
             placeholder={`${cellType === "course" ? "Course..." : "Grade..."}`}
+            onKeyDown={(e) => {
+              if (e.key === "Escape") closeActiveCell();
+            }}
           />
         </form>
       ),
@@ -123,10 +129,7 @@ const GradeRows = ({ studentInfo, setStudentInfo, editMode }) => {
           }}
           className={`grade-row ${editMode === "DEL" && pd === activeRow ? "delete-row" : ""}`}
         >
-          <td
-            location={`${row},1`}
-            className={`${TABLE_CELL_CLASS}`}
-          >
+          <td location={`${row},1`} className={`${TABLE_CELL_CLASS}`}>
             {pd}
           </td>
           <td
