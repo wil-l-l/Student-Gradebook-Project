@@ -24,7 +24,7 @@ const Header = ({ editMode, setEditMode, studentInfo, setStudentInfo }) => {
       </div>
 
       <div className="profile-box">
-        <img src="" alt="" className="profile-img" />
+        <img src="" alt={studentInfo.name} className="profile-img" />
         <p className="profile-name">{studentInfo.name}</p>
       </div>
     </header>

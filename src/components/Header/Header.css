@@ -3,7 +3,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid lightgray;
+  border-bottom: 1px solid rgb(183, 183, 183);
   padding: 20px 20px;
 }
 
@@ -15,7 +15,8 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: rgb(179, 179, 179);
+  border: 1px solid rgb(136, 136, 136);
+  background-color: var(--secondary-color);
 }
 .profile-name {
   margin-left: 10px;
