@@ -28,3 +28,31 @@
   align-items: center;
   column-gap: 10px;
 }
+
+@media (min-width: 768px) {
+  .profile-name {
+    font-size: 2.1rem;
+  }
+  .profile-img {
+    width: 48px;
+    height: 48px;
+  }
+}
+@media (min-width: 1024px) {
+  .profile-name {
+    font-size: 2.3rem;
+  }
+  .profile-img {
+    width: 51px;
+    height: 51px;
+  }
+}
+@media (min-width: 1440px) {
+  .profile-name {
+    font-size: 2.5rem;
+  }
+  .profile-img {
+    width: 54px;
+    height: 54px;
+  }
+}
