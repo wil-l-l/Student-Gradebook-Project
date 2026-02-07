@@ -107,7 +107,7 @@ const RequestBtn = ({
     >
       <img
         src={requestTypes[content].icon}
-        alt=""
+        alt={content}
         className="request-btn__img"
       />
     </button>
