@@ -15,6 +15,7 @@ const useGrades = (pathParam) => {
         const response = await fetch(BASE_URL + pathParam, {
           signal: abortControllerRef.current.signal,
         });
+        if (!response.ok) throw Error("Received an error trying to fetch data");
         const studentInfo = await response.json();
         setStudentInfo(studentInfo);
       } catch (err) {
