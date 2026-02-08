@@ -39,7 +39,7 @@ const GradeRows = ({
       };
       fetchGrades();
     }
-  }, [newStudentInfo, setStudentInfo]);
+  }, [newStudentInfo, setStudentInfo, currentStudent]);
 
   function canEditCell(location) {
     return (
