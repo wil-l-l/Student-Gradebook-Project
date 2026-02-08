@@ -7,7 +7,10 @@ import useGrades from "./hooks/useGrades";
 
 function App() {
   const [editMode, setEditMode] = useState(null);
-  const { studentInfo, setStudentInfo, error } = useGrades("/2");
+  const [currentStudent, setCurrentStudent] = useState(2);
+  const { studentInfo, setStudentInfo, error } = useGrades(
+    "/" + currentStudent,
+  );
 
   return (
     <>
@@ -27,6 +30,8 @@ function App() {
           />
 
           <MainSection
+            currentStudent={currentStudent}
+            setCurrentStudent={setCurrentStudent}
             studentInfo={studentInfo}
             editMode={editMode}
             setStudentInfo={setStudentInfo}

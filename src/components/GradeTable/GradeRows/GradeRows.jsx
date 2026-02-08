@@ -1,7 +1,12 @@
 import "./GradeRows.css";
 import { useEffect, useRef, useState } from "react";
 
-const GradeRows = ({ studentInfo, setStudentInfo, editMode }) => {
+const GradeRows = ({
+  studentInfo,
+  setStudentInfo,
+  editMode,
+  currentStudent,
+}) => {
   const rowsRef = useRef(null);
   const [activeRow, setActiveRow] = useState(null);
   const [cellToEdit, setCellToEdit] = useState(null);
@@ -18,7 +23,7 @@ const GradeRows = ({ studentInfo, setStudentInfo, editMode }) => {
         abortControllerRef.current = new AbortController();
 
         try {
-          const response = await fetch(BASE_URL + "/2", {
+          const response = await fetch(BASE_URL + "/" + currentStudent, {
             method: "PATCH",
             headers: {
               "Content-Type": "application/json",
