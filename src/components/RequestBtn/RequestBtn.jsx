@@ -38,12 +38,12 @@ const RequestBtn = ({
         {
           name: "Geography",
           pd: 5,
-          grade: 63,
+          grade: 80,
         },
         {
           name: "Science",
           pd: 2,
-          grade: 96,
+          grade: 88,
         },
         {
           name: "Math",
@@ -53,17 +53,17 @@ const RequestBtn = ({
         {
           name: "Music",
           pd: 4,
-          grade: 96,
+          grade: 97,
         },
         {
           name: "Art",
           pd: 6,
-          grade: 96,
+          grade: 100,
         },
         {
           name: "English",
           pd: 1,
-          grade: 96,
+          grade: 95,
         },
       ],
     };

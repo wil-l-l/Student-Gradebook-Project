@@ -1,73 +1,108 @@
 {
   "students": [
     {
-      "id": "1",
-      "name": "Loydie Kemery",
-      "grade_level": 9,
-      "courses": [
-        {
-          "name": "Sociology",
-          "pd": 2,
-          "grade": 69
-        },
-        {
-          "name": "Chemistry",
-          "pd": 6,
-          "grade": 89
-        }
-      ]
-    },
-    {
-      "id": "2",
-      "name": "Alf Tubridy",
+      "id": 1,
+      "name": "Myrtia Wooff",
       "grade_level": 12,
       "courses": [
         {
-          "name": "Geography",
-          "pd": 5,
-          "grade": 63
-        },
-        {
-          "name": "Art",
+          "name": "Art History",
           "pd": 2,
-          "grade": 96
+          "grade": 34
         },
         {
-          "name": "Art",
+          "name": "Computer Science",
+          "pd": 1,
+          "grade": 81
+        },
+        {
+          "name": "Digital Marketing",
           "pd": 3,
-          "grade": "100"
+          "grade": 90
         },
         {
-          "name": "Art",
+          "name": "Spanish I",
           "pd": 4,
-          "grade": 96
+          "grade": 87
         },
         {
-          "name": "Art",
-          "pd": 6,
-          "grade": 96
+          "name": "Astronomy",
+          "pd": 5,
+          "grade": 43
         },
         {
-          "name": "Art",
-          "pd": 7,
-          "grade": "52"
+          "name": "Psychology",
+          "pd": 5,
+          "grade": 100
+        },
+        {
+          "name": "Photography I",
+          "pd": 5,
+          "grade": 88
         }
       ]
     },
     {
-      "id": "3",
-      "name": "Marillin Stife",
-      "grade_level": 9,
+      "id": 2,
+      "name": "Felix Windrum",
+      "grade_level": 11,
       "courses": [
         {
-          "name": "Psychology",
-          "pd": 5,
-          "grade": 62
+          "name": "Computer Science",
+          "pd": 2,
+          "grade": 68
         },
         {
-          "name": "Literature",
+          "name": "World History",
+          "pd": 4,
+          "grade": 84
+        },
+        {
+          "name": "Art History",
+          "pd": 3,
+          "grade": 49
+        },
+        {
+          "name": "English II",
+          "pd": 5,
+          "grade": 68
+        },
+        {
+          "name": "Psychology",
           "pd": 6,
-          "grade": 75
+          "grade": 64
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Elinore Breedy",
+      "grade_level": 10,
+      "courses": [
+        {
+          "name": "Digital Marketing",
+          "pd": 6,
+          "grade": 66
+        },
+        {
+          "name": "Computer Science",
+          "pd": 5,
+          "grade": 95
+        },
+        {
+          "name": "Astronomy",
+          "pd": 7,
+          "grade": 67
+        },
+        {
+          "name": "Algebra",
+          "pd": 3,
+          "grade": 50
+        },
+        {
+          "name": "Photography I",
+          "pd": 4,
+          "grade": 69
         }
       ]
     }
