@@ -8,7 +8,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
+  transition: background-color 0.15s;
 }
+.request-btn:hover {
+  background-color: rgb(235, 235, 235);
+}
+
 .request-btn__img {
   width: 17px;
   height: 17px;
