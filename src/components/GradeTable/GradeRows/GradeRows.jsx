@@ -11,6 +11,7 @@ const GradeRows = ({
   const [activeRow, setActiveRow] = useState(null);
   const [cellToEdit, setCellToEdit] = useState(null);
   const [newStudentInfo, setNewStudentInfo] = useState(null);
+  const [deleteClicks, setDeleteClicks] = useState(0);
   const inputRef = useRef(null);
   const TABLE_CELL_CLASS = "grade-row__cell";
   const abortControllerRef = useRef(null);
@@ -39,7 +40,8 @@ const GradeRows = ({
       };
       fetchGrades();
     }
-  }, [newStudentInfo, setStudentInfo, currentStudent]);
+    console.warn(deleteClicks);
+  }, [newStudentInfo, setStudentInfo, currentStudent, deleteClicks]);
 
   function canEditCell(location) {
     return (
@@ -57,11 +59,15 @@ const GradeRows = ({
 
   function handleRowClick(rowClicked) {
     if (editMode !== "DEL") return;
-    if (activeRow === rowClicked) return;
+    if (activeRow === rowClicked) {
+      setDeleteClicks(deleteClicks + 1);
+      return;
+    }
 
     rowsRef.current.some((period) => {
       if (period === rowClicked) {
         setActiveRow(rowClicked);
+        setDeleteClicks(1);
         return true;
       }
     });
@@ -133,7 +139,7 @@ const GradeRows = ({
             if (!rowsRef.current) rowsRef.current = [];
             rowsRef.current.push(pd);
           }}
-          className={`grade-row ${editMode === "DEL" && pd === activeRow ? "delete-row" : ""}`}
+          className={`grade-row ${editMode === "DEL" && pd === activeRow ? `${deleteClicks === 1 ? "delete-row" : "delete-row-confirm"}` : ""}`}
         >
           <td location={`${row},1`} className={`${TABLE_CELL_CLASS}`}>
             {pd}

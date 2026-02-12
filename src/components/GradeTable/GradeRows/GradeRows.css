@@ -7,7 +7,12 @@
 }
 
 .delete-row {
-  border: 2px dashed red;
+  border: 3px dashed red;
+}
+.delete-row-confirm {
+  border: 4px dashed red;
+  color: red;
+  font-weight: bold;
 }
 
 .grade-row__cell {
