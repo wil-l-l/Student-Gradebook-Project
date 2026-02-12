@@ -16,31 +16,30 @@ const GradeRows = ({
   const TABLE_CELL_CLASS = "grade-row__cell";
   const abortControllerRef = useRef(null);
   const BASE_URL = "http://localhost:3000/students";
+  const deleteClicksThreshold = 3;
 
   useEffect(() => {
-    if (newStudentInfo) {
-      const fetchGrades = async () => {
-        if (abortControllerRef.current) abortControllerRef.current.abort();
-        abortControllerRef.current = new AbortController();
+    const fetchGrades = async () => {
+      if (abortControllerRef.current) abortControllerRef.current.abort();
+      abortControllerRef.current = new AbortController();
 
-        try {
-          const response = await fetch(BASE_URL + "/" + currentStudent, {
-            method: "PATCH",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(newStudentInfo),
-            signal: abortControllerRef.current.signal,
-          });
-          const studentInfo = await response.json();
-          setStudentInfo(studentInfo);
-        } catch (err) {
-          if (err.name === "AbortError") return;
-        }
-      };
-      fetchGrades();
-    }
-    console.warn(deleteClicks);
+      try {
+        const response = await fetch(BASE_URL + "/" + currentStudent, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newStudentInfo),
+          signal: abortControllerRef.current.signal,
+        });
+        const studentInfo = await response.json();
+        setStudentInfo(studentInfo);
+      } catch (err) {
+        if (err.name === "AbortError") return;
+      }
+    };
+
+    if (newStudentInfo) fetchGrades();
   }, [newStudentInfo, setStudentInfo, currentStudent, deleteClicks]);
 
   function canEditCell(location) {
@@ -57,10 +56,27 @@ const GradeRows = ({
     inputRef.current = null;
   };
 
+  const onDeletedRow = () => {
+    setDeleteClicks(0);
+    setActiveRow(null);
+  };
+
   function handleRowClick(rowClicked) {
     if (editMode !== "DEL") return;
     if (activeRow === rowClicked) {
-      setDeleteClicks(deleteClicks + 1);
+      const currentClicks = deleteClicks + 1;
+      setDeleteClicks(currentClicks);
+      if (currentClicks === deleteClicksThreshold) {
+        const newStudentInfo = { ...studentInfo };
+        const updatedCourses = [];
+        studentInfo.courses.forEach((studentObj) => {
+          if (studentObj.pd !== rowClicked) updatedCourses.push(studentObj);
+        });
+        newStudentInfo.courses = updatedCourses;
+
+        setNewStudentInfo(newStudentInfo);
+        onDeletedRow();
+      }
       return;
     }
 
