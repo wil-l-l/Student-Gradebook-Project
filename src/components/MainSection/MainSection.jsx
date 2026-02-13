@@ -5,6 +5,7 @@ const MainSection = ({
   studentInfo,
   setStudentInfo,
   editMode,
+  setEditMode,
   currentStudent,
   setCurrentStudent,
 }) => {
@@ -14,6 +15,7 @@ const MainSection = ({
         <StudentDropdown
           currentStudent={currentStudent}
           setCurrentStudent={setCurrentStudent}
+          setEditMode={setEditMode}
         />
         <GradeTable
           currentStudent={currentStudent}

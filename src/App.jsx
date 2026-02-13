@@ -33,8 +33,9 @@ function App() {
             currentStudent={currentStudent}
             setCurrentStudent={setCurrentStudent}
             studentInfo={studentInfo}
-            editMode={editMode}
             setStudentInfo={setStudentInfo}
+            editMode={editMode}
+            setEditMode={setEditMode}
           />
         </>
       )}

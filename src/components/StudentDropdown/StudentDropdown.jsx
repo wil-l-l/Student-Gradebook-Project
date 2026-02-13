@@ -1,13 +1,16 @@
 import "./StudentDropdown.css";
 
-const StudentDropdown = ({ currentStudent, setCurrentStudent }) => {
+const StudentDropdown = ({ currentStudent, setCurrentStudent, setEditMode }) => {
   return (
     <div className="student-dropdown-box">
       <p>Current Student: {currentStudent}</p>
       <form>
         <label htmlFor="">Select Different Student:</label>
         <select
-          onChange={(e) => setCurrentStudent(e.target.value)}
+          onChange={(e) => {
+            setCurrentStudent(e.target.value);
+            setEditMode(null);
+          }}
           className="student-dropdown"
         >
           <option value="" selected disabled hidden></option>
