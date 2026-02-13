@@ -12,13 +12,14 @@ const StudentDropdown = ({
       <form>
         <label htmlFor="">Select Different Student:</label>
         <select
+          defaultValue={""}
           onChange={(e) => {
             setCurrentStudent(e.target.value);
             setEditMode(null);
           }}
           className="student-dropdown"
         >
-          <option value="" selected disabled hidden></option>
+          <option value="" disabled hidden></option>
           {[...Array(students.length).keys()].map((num) => (
             <option key={num + 1} value={num + 1}>
               {num + 1}
