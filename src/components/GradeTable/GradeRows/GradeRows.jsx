@@ -28,21 +28,16 @@ const GradeRows = ({
           body: JSON.stringify(newStudentInfo),
         },
         "?id=" + currentStudent,
-      ).then(
-        (result) => {
-          setStudents(result);
-        },
-        (error) => {
-          console.log(error);
-        },
-      );
+      ).then((result) => {
+        setStudents(result);
+      });
     }
 
     return () => {
       setActiveRow(null);
       setNewStudentInfo(null);
     };
-  }, [studentToView, currentStudent, editMode, newStudentInfo, setStudents]);
+  }, [currentStudent, editMode, newStudentInfo, setStudents]);
 
   function canEditCell(location) {
     return (

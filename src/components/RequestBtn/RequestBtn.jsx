@@ -73,15 +73,10 @@ const RequestBtn = ({
         "Content-Type": "application/json",
       },
       body: JSON.stringify(presetData),
-    }).then(
-      (result) => {
-        setStudents([...students, result]);
-        cleanUp();
-      },
-      (error) => {
-        console.log(error);
-      },
-    );
+    }).then((result) => {
+      setStudents([...students, result]);
+      cleanUp();
+    });
   }
 
   return (
