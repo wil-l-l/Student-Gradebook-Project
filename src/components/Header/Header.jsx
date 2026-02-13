@@ -7,6 +7,7 @@ const Header = ({
   studentToView,
   students,
   setStudents,
+  setCurrentStudent,
 }) => {
   return (
     <header className="header-box">
@@ -17,6 +18,7 @@ const Header = ({
           setEditMode={setEditMode}
           students={students}
           setStudents={setStudents}
+          setCurrentStudent={setCurrentStudent}
         />
         <RequestBtn
           content={"UPD"}

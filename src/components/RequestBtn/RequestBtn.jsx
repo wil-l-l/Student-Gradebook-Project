@@ -11,6 +11,7 @@ const RequestBtn = ({
   setEditMode,
   students,
   setStudents,
+  setCurrentStudent = null,
 }) => {
   const [isAddMode, setIsAddMode] = useState(false);
   const requestIcons = {
@@ -20,6 +21,15 @@ const RequestBtn = ({
   };
 
   function onAddButtonClick() {
+    const cleanUp = () => {
+      setEditMode(null);
+      setCurrentStudent(4);
+    };
+
+    if (students.length === 4) {
+      cleanUp();
+      return;
+    }
     const presetData = {
       id: "4",
       name: "Bri Stewart",
@@ -66,6 +76,7 @@ const RequestBtn = ({
     }).then(
       (result) => {
         setStudents([...students, result]);
+        cleanUp();
       },
       (error) => {
         console.log(error);

@@ -38,13 +38,14 @@ function App() {
             studentToView={students[currentStudent - 1]}
             students={students}
             setStudents={setStudents}
+            setCurrentStudent={setCurrentStudent}
           />
 
           <MainSection
             students={students}
             setStudents={setStudents}
             studentToView={students[currentStudent - 1]}
-            currentStudent={currentStudent} // (This state and setter function) Only goes to 'StudentDropdown' component from 'Main Section'
+            currentStudent={currentStudent} 
             setCurrentStudent={setCurrentStudent}
             editMode={editMode}
             setEditMode={setEditMode}
