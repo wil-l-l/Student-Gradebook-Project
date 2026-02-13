@@ -2,7 +2,7 @@ import "./RequestBtn.css";
 import UpdateIcon from "../../assets/icons/edit-pen-icon.png";
 import AddIcon from "../../assets/icons/plus-icon.png";
 import DeleteIcon from "../../assets/icons/trash-can-black-icon.png";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import fetchStudents from "../../utils/fetchStudents";
 
 const RequestBtn = ({
@@ -14,6 +14,7 @@ const RequestBtn = ({
   setCurrentStudent = null,
 }) => {
   const [isAddMode, setIsAddMode] = useState(false);
+  const abortControllerRef = useRef(null);
   const requestIcons = {
     ADD: AddIcon,
     UPD: UpdateIcon,
@@ -67,13 +68,15 @@ const RequestBtn = ({
         },
       ],
     };
+    if (abortControllerRef.current) abortControllerRef.current.abort();
+    abortControllerRef.current = new AbortController();
     fetchStudents({
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(presetData),
-    }).then((result) => {
+    }, "", abortControllerRef.current).then((result) => {
       setStudents([...students, result]);
       cleanUp();
     });

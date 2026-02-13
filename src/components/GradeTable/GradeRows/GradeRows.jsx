@@ -17,9 +17,13 @@ const GradeRows = ({
   const inputRef = useRef(null);
   const TABLE_CELL_CLASS = "grade-row__cell";
   const deleteClicksThreshold = 3;
+  const abortControllerRef = useRef(null);
 
   useEffect(() => {
     if (newStudentInfo) {
+      if (abortControllerRef.current) abortControllerRef.current.abort();
+      abortControllerRef.current = new AbortController();
+
       fetchStudents(
         {
           method: "PATCH",
@@ -29,6 +33,7 @@ const GradeRows = ({
           body: JSON.stringify(newStudentInfo),
         },
         "/" + currentStudent,
+        abortControllerRef.current,
       ).then((result) => {
         const newStudents = [...students];
         newStudents[currentStudent - 1] = result;

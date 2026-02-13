@@ -2,7 +2,7 @@ import "./Reset.css";
 import "./App.css";
 import Header from "./components/Header/Header";
 import MainSection from "./components/MainSection/MainSection";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import fetchStudents from "./utils/fetchStudents";
 
 function App() {
@@ -10,9 +10,13 @@ function App() {
   const [currentStudent, setCurrentStudent] = useState(2);
   const [error, setError] = useState(null);
   const [editMode, setEditMode] = useState(null);
+  const abortControllerRef = useRef(null);
 
   useEffect(() => {
-    fetchStudents().then(
+    if (abortControllerRef.current) abortControllerRef.current.abort();
+    abortControllerRef.current = new AbortController();
+
+    fetchStudents({}, "", abortControllerRef.current).then(
       (result) => {
         setStudents(result);
       },
@@ -45,7 +49,7 @@ function App() {
             students={students}
             setStudents={setStudents}
             studentToView={students[currentStudent - 1]}
-            currentStudent={currentStudent} 
+            currentStudent={currentStudent}
             setCurrentStudent={setCurrentStudent}
             editMode={editMode}
             setEditMode={setEditMode}
