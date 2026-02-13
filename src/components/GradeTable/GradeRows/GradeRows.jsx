@@ -34,13 +34,25 @@ const GradeRows = ({
         });
         const studentInfo = await response.json();
         setStudentInfo(studentInfo);
+        setNewStudentInfo(null);
       } catch (err) {
         if (err.name === "AbortError") return;
       }
     };
 
     if (newStudentInfo) fetchGrades();
-  }, [newStudentInfo, setStudentInfo, currentStudent, deleteClicks]);
+
+    return () => {
+      setActiveRow(null);
+      setCellToEdit(null);
+    };
+  }, [
+    studentInfo,
+    newStudentInfo,
+    setStudentInfo,
+    currentStudent,
+    deleteClicks,
+  ]);
 
   function canEditCell(location) {
     return (
