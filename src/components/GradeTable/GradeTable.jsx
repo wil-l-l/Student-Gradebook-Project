@@ -5,6 +5,7 @@ const GradeTable = ({
   studentToView,
   currentStudent,
   editMode,
+  students,
   setStudents
 }) => {
   return (
@@ -21,6 +22,7 @@ const GradeTable = ({
           currentStudent={currentStudent}
           studentToView={studentToView}
           editMode={editMode}
+          students={students}
           setStudents={setStudents}
         />
       </tbody>

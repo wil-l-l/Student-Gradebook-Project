@@ -23,6 +23,7 @@ const MainSection = ({
           studentToView={studentToView}
           currentStudent={currentStudent}
           editMode={editMode}
+          students={students}
           setStudents={setStudents}
         />
       </>

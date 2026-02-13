@@ -6,6 +6,7 @@ const GradeRows = ({
   studentToView,
   currentStudent,
   editMode,
+  students,
   setStudents,
 }) => {
   const rowsRef = useRef(null);
@@ -27,9 +28,11 @@ const GradeRows = ({
           },
           body: JSON.stringify(newStudentInfo),
         },
-        "?id=" + currentStudent,
+        "/" + currentStudent,
       ).then((result) => {
-        setStudents(result);
+        const newStudents = [...students];
+        newStudents[currentStudent - 1] = result;
+        setStudents(newStudents);
       });
     }
 
@@ -37,7 +40,7 @@ const GradeRows = ({
       setActiveRow(null);
       setNewStudentInfo(null);
     };
-  }, [currentStudent, editMode, newStudentInfo, setStudents]);
+  }, [currentStudent, editMode, newStudentInfo, students, setStudents]);
 
   function canEditCell(location) {
     return (
