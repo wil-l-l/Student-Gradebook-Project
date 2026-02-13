@@ -2,8 +2,9 @@ import GradeTable from "../GradeTable/GradeTable";
 import StudentDropdown from "../StudentDropdown/StudentDropdown";
 
 const MainSection = ({
-  studentInfo,
-  setStudentInfo,
+  students,
+  setStudents,
+  studentToView,
   editMode,
   setEditMode,
   currentStudent,
@@ -13,15 +14,16 @@ const MainSection = ({
     <main className="main-section">
       <>
         <StudentDropdown
+          students={students}
           currentStudent={currentStudent}
           setCurrentStudent={setCurrentStudent}
           setEditMode={setEditMode}
         />
         <GradeTable
+          studentToView={studentToView}
           currentStudent={currentStudent}
-          studentInfo={studentInfo}
           editMode={editMode}
-          setStudentInfo={setStudentInfo}
+          setStudents={setStudents}
         />
       </>
     </main>

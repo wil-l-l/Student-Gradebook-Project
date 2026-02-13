@@ -1,6 +1,11 @@
 import "./StudentDropdown.css";
 
-const StudentDropdown = ({ currentStudent, setCurrentStudent, setEditMode }) => {
+const StudentDropdown = ({
+  students,
+  currentStudent,
+  setCurrentStudent,
+  setEditMode,
+}) => {
   return (
     <div className="student-dropdown-box">
       <p>Current Student: {currentStudent}</p>
@@ -14,9 +19,11 @@ const StudentDropdown = ({ currentStudent, setCurrentStudent, setEditMode }) => 
           className="student-dropdown"
         >
           <option value="" selected disabled hidden></option>
-          <option value={1}>1</option>
-          <option value={2}>2</option>
-          <option value={3}>3</option>
+          {[...Array(students.length).keys()].map((num) => (
+            <option key={num + 1} value={num + 1}>
+              {num + 1}
+            </option>
+          ))}
         </select>
       </form>
     </div>

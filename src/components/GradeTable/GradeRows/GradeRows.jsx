@@ -1,11 +1,12 @@
 import "./GradeRows.css";
 import { useEffect, useRef, useState } from "react";
+import fetchStudents from "../../../utils/fetchStudents";
 
 const GradeRows = ({
-  studentInfo,
-  setStudentInfo,
-  editMode,
+  studentToView,
   currentStudent,
+  editMode,
+  setStudents,
 }) => {
   const rowsRef = useRef(null);
   const [activeRow, setActiveRow] = useState(null);
@@ -14,45 +15,34 @@ const GradeRows = ({
   const [deleteClicks, setDeleteClicks] = useState(0);
   const inputRef = useRef(null);
   const TABLE_CELL_CLASS = "grade-row__cell";
-  const abortControllerRef = useRef(null);
-  const BASE_URL = "http://localhost:3000/students";
   const deleteClicksThreshold = 3;
 
   useEffect(() => {
-    const fetchGrades = async () => {
-      if (abortControllerRef.current) abortControllerRef.current.abort();
-      abortControllerRef.current = new AbortController();
-
-      try {
-        const response = await fetch(BASE_URL + "/" + currentStudent, {
+    if (newStudentInfo) {
+      fetchStudents(
+        {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(newStudentInfo),
-          signal: abortControllerRef.current.signal,
-        });
-        const studentInfo = await response.json();
-        setStudentInfo(studentInfo);
-        setNewStudentInfo(null);
-      } catch (err) {
-        if (err.name === "AbortError") return;
-      }
-    };
-
-    if (newStudentInfo) fetchGrades();
+        },
+        "?id=" + currentStudent,
+      ).then(
+        (result) => {
+          setStudents(result);
+        },
+        (error) => {
+          console.log(error);
+        },
+      );
+    }
 
     return () => {
       setActiveRow(null);
-      setCellToEdit(null);
+      setNewStudentInfo(null);
     };
-  }, [
-    studentInfo,
-    newStudentInfo,
-    setStudentInfo,
-    currentStudent,
-    deleteClicks,
-  ]);
+  }, [studentToView, currentStudent, editMode, newStudentInfo, setStudents]);
 
   function canEditCell(location) {
     return (
@@ -79,9 +69,9 @@ const GradeRows = ({
       const currentClicks = deleteClicks + 1;
       setDeleteClicks(currentClicks);
       if (currentClicks === deleteClicksThreshold) {
-        const newStudentInfo = { ...studentInfo };
+        const newStudentInfo = { ...studentToView };
         const updatedCourses = [];
-        studentInfo.courses.forEach((studentObj) => {
+        studentToView.courses.forEach((studentObj) => {
           if (studentObj.pd !== rowClicked) updatedCourses.push(studentObj);
         });
         newStudentInfo.courses = updatedCourses;
@@ -117,7 +107,7 @@ const GradeRows = ({
           onSubmit={async (e) => {
             e.preventDefault();
 
-            const newStudentInfo = studentInfo.courses.map(
+            const newStudentInfo = studentToView.courses.map(
               ({ name, pd, grade }) => {
                 if (rowPeriod === pd) {
                   if (cellType === "course") {
@@ -134,7 +124,7 @@ const GradeRows = ({
               },
             );
 
-            setNewStudentInfo({ ...studentInfo, courses: newStudentInfo });
+            setNewStudentInfo({ ...studentToView, courses: newStudentInfo });
 
             closeActiveCell();
           }}
@@ -156,7 +146,7 @@ const GradeRows = ({
     });
   }
 
-  return studentInfo.courses
+  return studentToView.courses
     .map(({ pd, name, grade }, row) => ({
       pd,
       courseInfo: (

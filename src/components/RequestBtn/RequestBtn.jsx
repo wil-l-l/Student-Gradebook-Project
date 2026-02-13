@@ -2,36 +2,26 @@ import "./RequestBtn.css";
 import UpdateIcon from "../../assets/icons/edit-pen-icon.png";
 import AddIcon from "../../assets/icons/plus-icon.png";
 import DeleteIcon from "../../assets/icons/trash-can-black-icon.png";
-import { useRef, useState } from "react";
+import { useState } from "react";
+import fetchStudents from "../../utils/fetchStudents";
 
 const RequestBtn = ({
   content,
   editMode,
   setEditMode,
-  setStudentInfo = null,
+  students,
+  setStudents,
 }) => {
   const [isAddMode, setIsAddMode] = useState(false);
-  const abortControllerRef = useRef(null);
-  const requestTypes = {
-    ADD: {
-      method: "POST",
-      icon: AddIcon,
-    },
-    UPD: {
-      method: "PATCH",
-      icon: UpdateIcon,
-    },
-    DEL: {
-      method: "DELETE",
-      icon: DeleteIcon,
-    },
+  const requestIcons = {
+    ADD: AddIcon,
+    UPD: UpdateIcon,
+    DEL: DeleteIcon,
   };
 
-  async function onAddButtonClick() {
-    const BASE_URL = "http://localhost:3000/students";
-
+  function onAddButtonClick() {
     const presetData = {
-      id: "5",
+      id: "4",
       name: "Bri Stewart",
       grade_level: 11,
       courses: [
@@ -67,31 +57,27 @@ const RequestBtn = ({
         },
       ],
     };
-
-    if (abortControllerRef.current) abortControllerRef.current.abort();
-    abortControllerRef.current = new AbortController();
-
-    try {
-      const response = await fetch(BASE_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(presetData),
-        signal: abortControllerRef.current.signal,
-      });
-      const newData = await response.json();
-      setStudentInfo(newData);
-    } catch (err) {
-      if (err.name === "AbortError") return;
-    }
+    fetchStudents({
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(presetData),
+    }).then(
+      (result) => {
+        setStudents([...students, result]);
+      },
+      (error) => {
+        console.log(error);
+      },
+    );
   }
 
   return (
     <button
       onClick={() => {
         setEditMode(
-          editMode === null && requestTypes[content]
+          editMode === null && requestIcons[content]
             ? content
             : content !== editMode
               ? editMode
@@ -109,7 +95,7 @@ const RequestBtn = ({
       className={`request-btn ${editMode === content ? "request-btn--active" : "request-btn--inactive"}`}
     >
       <img
-        src={requestTypes[content].icon}
+        src={requestIcons[content]}
         alt={content}
         className="request-btn__img"
       />

@@ -2,38 +2,50 @@ import "./Reset.css";
 import "./App.css";
 import Header from "./components/Header/Header";
 import MainSection from "./components/MainSection/MainSection";
-import { useState } from "react";
-import useGrades from "./hooks/useGrades";
+import { useState, useEffect } from "react";
+import fetchStudents from "./utils/fetchStudents";
 
 function App() {
-  const [editMode, setEditMode] = useState(null);
+  const [students, setStudents] = useState(null);
   const [currentStudent, setCurrentStudent] = useState(2);
-  const { studentInfo, setStudentInfo, error } = useGrades(
-    "/" + currentStudent,
-  );
+  const [error, setError] = useState(null);
+  const [editMode, setEditMode] = useState(null);
+
+  useEffect(() => {
+    fetchStudents().then(
+      (result) => {
+        setStudents(result);
+      },
+      (reason) => {
+        setError(
+          "Couldn't load students data. Please refresh the page! " + reason,
+        );
+      },
+    );
+  }, []);
 
   return (
     <>
-      {!studentInfo && !error ? (
+      {!students && !error ? (
         <h1>Loading...</h1>
-      ) : !studentInfo && error ? (
-        <h1 className="error-text">
-          Error Loading Data. Please refresh the page!
-        </h1>
+      ) : !students && error ? (
+        <h1 className="error-text">{error}</h1>
       ) : (
         <>
           <Header
             editMode={editMode}
             setEditMode={setEditMode}
-            studentInfo={studentInfo}
-            setStudentInfo={setStudentInfo}
+            studentToView={students[currentStudent - 1]}
+            students={students}
+            setStudents={setStudents}
           />
 
           <MainSection
-            currentStudent={currentStudent}
+            students={students}
+            setStudents={setStudents}
+            studentToView={students[currentStudent - 1]}
+            currentStudent={currentStudent} // (This state and setter function) Only goes to 'StudentDropdown' component from 'Main Section'
             setCurrentStudent={setCurrentStudent}
-            studentInfo={studentInfo}
-            setStudentInfo={setStudentInfo}
             editMode={editMode}
             setEditMode={setEditMode}
           />

@@ -1,7 +1,13 @@
 import "./Header.css";
 import RequestBtn from "../RequestBtn/RequestBtn";
 
-const Header = ({ editMode, setEditMode, studentInfo, setStudentInfo }) => {
+const Header = ({
+  editMode,
+  setEditMode,
+  studentToView,
+  students,
+  setStudents,
+}) => {
   return (
     <header className="header-box">
       <div className="request-btn-box">
@@ -9,7 +15,8 @@ const Header = ({ editMode, setEditMode, studentInfo, setStudentInfo }) => {
           content={"ADD"}
           editMode={editMode}
           setEditMode={setEditMode}
-          setStudentInfo={setStudentInfo}
+          students={students}
+          setStudents={setStudents}
         />
         <RequestBtn
           content={"UPD"}
@@ -24,8 +31,8 @@ const Header = ({ editMode, setEditMode, studentInfo, setStudentInfo }) => {
       </div>
 
       <div className="profile-box">
-        <img src="" alt={studentInfo.name} className="profile-img" />
-        <p className="profile-name">{studentInfo.name}</p>
+        <img src="" alt={studentToView.name} className="profile-img" />
+        <p className="profile-name">{studentToView.name}</p>
       </div>
     </header>
   );
