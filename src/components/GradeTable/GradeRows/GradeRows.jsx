@@ -9,7 +9,6 @@ const GradeRows = ({
   students,
   setStudents,
 }) => {
-  const rowsRef = useRef(null);
   const [activeRow, setActiveRow] = useState(null);
   const [cellToEdit, setCellToEdit] = useState(null);
   const [newStudentInfo, setNewStudentInfo] = useState(null);
@@ -85,13 +84,8 @@ const GradeRows = ({
       return;
     }
 
-    rowsRef.current.some((period) => {
-      if (period === rowClicked) {
-        setActiveRow(rowClicked);
-        setDeleteClicks(1);
-        return true;
-      }
-    });
+    setActiveRow(rowClicked);
+    setDeleteClicks(1);
   }
 
   function handleCellClick(cell, rowPeriod) {
@@ -156,10 +150,6 @@ const GradeRows = ({
         <tr
           key={pd}
           onClick={() => handleRowClick(pd)}
-          ref={() => {
-            if (!rowsRef.current) rowsRef.current = [];
-            rowsRef.current.push(pd);
-          }}
           className={`grade-row ${editMode === "DEL" && pd === activeRow ? `${deleteClicks === 1 ? "delete-row" : "delete-row-confirm"}` : ""}`}
         >
           <td location={`${row},1`} className={`${TABLE_CELL_CLASS}`}>
