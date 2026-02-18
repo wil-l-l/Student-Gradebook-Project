@@ -1,10 +1,6 @@
-const BASE_URL = "http://localhost:3000/students";
+const BASE_URL = "https://grades-server-2.onrender.com/students";
 
-const fetchStudents = async (
-  options = {},
-  pathParam = "",
-  abortController,
-) => {
+const fetchStudents = async (options = {}, pathParam = "", abortController) => {
   const studentsJSON = await fetch(BASE_URL + pathParam, {
     ...options,
     signal: abortController.signal,
