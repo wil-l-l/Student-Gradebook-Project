@@ -8,6 +8,7 @@ My intention with this project was to demonstrate that I can use the Fetch API o
 Open the JSON Server link as well in another tab for HTTP requests to work!
 
 My Project: https://grades-api-project.vercel.app/
+
 JSON Server: https://grades-server-2.onrender.com/
 
 
