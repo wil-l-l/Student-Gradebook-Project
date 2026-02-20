@@ -5,8 +5,10 @@ My intention with this project was to demonstrate that I can use the Fetch API o
 
 
 ## Demo
+Open the JSON Server link as well in another tab for HTTP requests to work!
 
 My Project: https://grades-api-project.vercel.app/
+JSON Server: https://grades-server-2.onrender.com/
 
 
 ## Features
@@ -37,9 +39,11 @@ One challenge I encountered during development was figuring out how to sync chan
 
 Another challenge I encountered was when I was trying to deploy my project. During development, I had been using the 'json-server' package on npm to make fetch calls, however when I deployed my project, I could no longer use the local JSON server. To overcome this, I simply did research online as to how to deploy a JSON server, which eventually led to a YouTube video with the exact solution I needed to be able to have a live demo of this project.
 
+
+
 Can you describe your development process from its initial stages to final deployment?
 
-The first phase of development was creating and styling primary components of the application.Next, I installed the 'json-server' package, created a JSON file with student grade data, and after fetching that data, displayed it the previously made components. After that, the bulk of the development went towards achieving my desired functionality of the grade table based on the editing mode selected. Finally, there was the deployment of the project in which I had to use Render to create a JSON server that would let me make fetch calls to a backend.
+The first phase of development was creating and styling primary components of the application. Next, I installed the 'json-server' package, created a JSON file with student grade data, and after fetching that data, displayed it the previously made components. After that, the bulk of the development went towards achieving my desired functionality of the grade table based on the editing mode selected. Finally, there was the deployment of the project in which I had to use Render to create a JSON server that would let me make fetch calls to a backend.
 
 
 ## Planned Improvements
