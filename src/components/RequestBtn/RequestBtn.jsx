@@ -107,6 +107,8 @@ const RequestBtn = ({
         src={requestIcons[content]}
         alt={content}
         className="request-btn__img"
+        width={512}
+        height={512}
       />
     </button>
   );
