@@ -10,8 +10,9 @@ const StudentDropdown = ({
     <div className="student-dropdown-box">
       <p>Current Student: {currentStudent}</p>
       <form>
-        <label htmlFor="">Select Different Student:</label>
+        <label htmlFor="student-dropdown">Select Different Student:</label>
         <select
+          id="student-dropdown"
           defaultValue={""}
           onChange={(e) => {
             setCurrentStudent(e.target.value);
