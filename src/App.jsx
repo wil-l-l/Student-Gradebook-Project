@@ -4,6 +4,7 @@ import Header from "./components/Header/Header";
 import MainSection from "./components/MainSection/MainSection";
 import { useState, useEffect, useRef } from "react";
 import fetchStudents from "./utils/fetchStudents";
+import { Link } from "react-router";
 
 function App() {
   const [students, setStudents] = useState(null);
@@ -31,7 +32,15 @@ function App() {
   return (
     <>
       {!students && !error ? (
-        <h1>Loading...</h1>
+        <>
+          <h1>Loading...</h1>
+          <Link
+            className="server-link"
+            to={"https://grades-server-2.onrender.com/"}
+          >
+            Make sure to open this link in a new tab if you haven't already!
+          </Link>
+        </>
       ) : !students && error ? (
         <h1 className="error-text">{error}</h1>
       ) : (
