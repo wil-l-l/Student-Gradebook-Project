@@ -35,6 +35,7 @@ function App() {
         <>
           <h1>Loading...</h1>
           <Link
+            target="_blank"
             className="server-link"
             to={"https://grades-server-2.onrender.com/"}
           >
