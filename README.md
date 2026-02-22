@@ -11,6 +11,11 @@ My Project: https://student-gradebook-project.vercel.app/
 
 JSON Server: https://grades-server-2.onrender.com/
 
+Instructions: 
+Click on the top left buttons to edit student data.
+Plus: Adds a new student to JSON data (intentionally limited to only 1 new entry)
+Pencil: Click on any course or grade to update that data for the student (hit the 'Enter' key to submit that change & hit the 'Escape' key to exit the change field)
+Trash Can: (1) Click on any row in the table to select a course for deletion. (2) Click again on the selected row to confirm deletion. (3) Third click on the same row will delete the course from the table.
 
 ## Features
 
