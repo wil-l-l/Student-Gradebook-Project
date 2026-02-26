@@ -186,7 +186,7 @@ const GradeRows = ({
         </tr>
       ),
     }))
-    .sort((a, b) => (a.pd > b.pd ? 1 : a.pd < b.pd ? -1 : 0))
+    .toSorted((a, b) => (a.pd > b.pd ? 1 : a.pd < b.pd ? -1 : 0))
     .map(({ courseInfo }) => courseInfo);
 };
 
